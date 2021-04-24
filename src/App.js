@@ -7,8 +7,9 @@ import AddTask from './Components/AddTask'
 function App() {
 
   const [showAddTask,setShowAddTask] = useState(false);
-  const [tasks,setTasks] = useState([
-    ])
+  const [tasks,setTasks] = useState([]);
+  const [color,setColor] = useState('green');
+  const [text,setText] = useState('Add');
   
   // A function to add task
   const addTask = (task) => {
@@ -19,6 +20,14 @@ function App() {
   
   // A function to toggle add task form
   const toggleAddTask = () => {
+    if(showAddTask) {
+      setText('Add');
+      setColor('green');
+    }
+    else {
+      setText('Close');
+      setColor('red');
+    }
     setShowAddTask(!showAddTask);
   }
 
@@ -37,7 +46,7 @@ function App() {
 
   return (
     <div className="container">
-      <Header onToggle={ toggleAddTask } />
+      <Header onToggle={ toggleAddTask } color={ color } buttonText = { text } />
       {showAddTask && <AddTask onAdd={ addTask } />}
       {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} /> : 'You don\'t have any tasks pending!'}
     </div>
