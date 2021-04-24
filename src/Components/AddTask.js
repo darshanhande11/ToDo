@@ -1,13 +1,26 @@
 import { useState } from 'react';
 
-function AddTask() {
+function AddTask({ onAdd }) {
 
     const [text,setText] = useState('');
     const [day,setDay] = useState('');
     const [reminder,setReminder] = useState(false);
 
+    const onSubmit = (e) => {
+        e.preventDefault(); // This prevents it from submitting it to a page.
+        if(!text) {
+            alert('Task field can\'t be empty!');
+            return;
+        } 
+        onAdd({ text, day, reminder });
+
+        setText('');
+        setDay('');
+        setReminder(false);
+    }
+
     return (
-        <form className='add-form'>
+        <form className='add-form' onSubmit={ onSubmit }>
             <div className='form-control'>
                 <label>Task</label>
                 <input type='text' placeholder='Add Task' value={text} onChange={(e)=>setText(e.target.value)}></input>
@@ -18,10 +31,10 @@ function AddTask() {
             </div>
             <div className='form-control form-control-check'>
                 <label>Set Reminder</label>
-                <input type='checkbox' value={reminder} onChange={(e)=>setReminder(e.currentTarget.checked)}></input>
+                <input type='checkbox' value={reminder} checked={ reminder } onChange={(e)=>setReminder(e.currentTarget.checked)}></input>
             </div>
 
-            <input type='submit' value='Save Task' className='btn btn-block' />
+            <input type='submit' value='Save Task' className='btn btn-block'/>
         </form>
     )
 }
