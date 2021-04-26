@@ -103,7 +103,7 @@ function App() {
             {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} /> : 'You don\'t have any tasks pending!'}
           </>
         )} />
-        <Route path='/About' component= { About } />
+        <Route path='/about' component= { About } />
         <Footer />
       </div>
     </Router>
