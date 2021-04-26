@@ -12,7 +12,7 @@ function About() {
                 <a href="https://twitter.com/hande_darshan"><img src="https://img.shields.io/badge/twitter-%231DA1F2.svg?&style=for-the-badge&logo=twitter&logoColor=white" alt='' /></a>&nbsp;&nbsp;
                 <a href="https://www.instagram.com/darshanhande11/"><img src="https://img.shields.io/badge/instagram-%23E4405F.svg?&style=for-the-badge&logo=instagram&logoColor=white" alt='' /></a>&nbsp;&nbsp;
             </p>
-            <Link to="/" style={{ marginTop: 20, marginLeft: 10 }}>Go Back</Link>
+            <Link to="/ToDo" style={{ marginTop: 20, marginLeft: 10 }}>Go Back</Link>
         </div>
     )
 }
