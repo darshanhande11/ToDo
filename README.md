@@ -1,20 +1,14 @@
 # ToDo
 **A simple ToDo application to manage your daily tasks and set reminders.**
 
-![ToDo](https://user-images.githubusercontent.com/56157418/116068137-879e9b80-a6a7-11eb-9653-a2790f9bd41d.gif)
+![to_do](https://user-images.githubusercontent.com/56157418/165235667-3c5a2bfb-70ee-40a8-8adf-7c30fce33f9f.gif)
 
 
 ### What can it do?
-- Add Task and Day & Time.
-- Also, set a reminder while adding a task, by checking the checkbox.
-- Or, you can also double tap a task to add a reminder to it.
-- Delete a Task by clicking the red cross icon.
+- Add a Task.
+- Delete a Task.
+- Unmark a Task as not done.
 
-### Framework and Dependencies
-- React JS used for the overall FrontEnd Dev.
-- [npm json server](https://www.npmjs.com/package/json-server) helps us to use a mock backend and save the tasks in a json file. We can also perform POST, PUT and DELETE requests to `http://localhost:5000/tasks` using this dependency.
-- [react-icons](https://www.npmjs.com/package/react-icons) used for icons.
-- [react-router-dom](https://www.npmjs.com/package/react-router-dom) used for adding routes and Link Component.
 
 ### Steps to run the application locally
 - You should have npm installed on your machine.
