@@ -2,7 +2,7 @@ import Tasks from './Components/Tasks';
 import { useState, useEffect } from 'react';
 import AddTask from './Components/AddTask';
 import About from './Components/About';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 function App() {
@@ -51,6 +51,7 @@ function App() {
 
   return (
     <Router>
+      <Switch>
         <Route path = '/'>
           <div className='container'>
             <p style={{ textAlign: 'center', fontSize: '2vw', fontWeight: 'bold' }}>{ 'THINGS TO DO:' }</p>
@@ -62,6 +63,7 @@ function App() {
           </div>
         </Route>
         <Route path='/about' component= { About } />
+      </Switch>
     </Router>
   );
 }
