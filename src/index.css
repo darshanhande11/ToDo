@@ -28,16 +28,15 @@ body {
 }
 
 .btn {
-  display: inline-block;
-  background: #000;
+  background: rgb(16, 147, 224);
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  margin: 5px;
+  padding: 0.1vh 1vw;
+  height: 6vh;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 2vh;
   font-family: inherit;
 }
 
@@ -55,10 +54,20 @@ body {
 }
 
 .task {
-  background: #f4f4f4;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
+}
+
+.del-btn {
+  border-radius: 0.3vw ;
+  background-color: rgb(214, 214, 214);
+  padding: 0.2vw 0.4vw;
+  cursor: pointer;
+}
+
+.task:hover {
+  background: #eee;
 }
 
 .task.reminder {

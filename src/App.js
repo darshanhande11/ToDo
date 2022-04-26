@@ -1,18 +1,13 @@
-import Header from './Components/Header';
 import Tasks from './Components/Tasks';
 import { useState, useEffect } from 'react';
 import AddTask from './Components/AddTask';
-import Footer from './Components/Footer';
 import About from './Components/About';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 function App() {
 
-  const [showAddTask,setShowAddTask] = useState(false);
   const [tasks,setTasks] = useState([]);
-  const [color,setColor] = useState('green');
-  const [text,setText] = useState('Add');
   
   // useEffect function is used to show changes on the page if any changes occur 
   useEffect(()=>{
@@ -23,88 +18,51 @@ function App() {
     getTasks();
   },[])
 
-  // A function to fetch Tasks from Mock Backend i.e. db.json file
+  // This function fetches the default tasks from the url.
   const fetchTasks = async () => {
-    const res = await fetch(`http://localhost:5000/tasks`);
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/1/todos`);
     const data = await res.json();
-    return data;
-  }
-
-  // A funciton to fetch a single task from Mock Backend
-  const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`);
-    const data = await res.json();
+    console.log(data);
     return data;
   }
 
   // A function to add task
   const addTask = async (task) => {
-    // const id = Math.floor(Math.random() * 1000) + 1;
-    // const newTask = {id, ...task};
-    // setTasks([...tasks, newTask]);
-    const res = await fetch(`http://localhost:5000/tasks`,{
-      method: 'POST',
-      headers: {
-        'Content-type' : 'application/json',
-      },
-      body: JSON.stringify(task)
-    })
-
-    const data = await res.json();
-    setTasks([...tasks,data])
-  }
-  
-  // A function to toggle add task form
-  const toggleAddTask = () => {
-    if(showAddTask) {
-      setText('Add');
-      setColor('green');
-    }
-    else {
-      setText('Close');
-      setColor('red');
-    }
-    setShowAddTask(!showAddTask);
+    task = {...task, id: tasks.length + 1, userId: 1};
+    console.log(task);
+    setTasks([...tasks,task])
+    console.log(tasks);
   }
 
   // A function to delete task
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: 'DELETE',
-    })
     setTasks(tasks.filter((task)=>(task.id !== id)))
   }
 
-  // Toggle reminder
-  const toggleReminder = async (id) => {
-    const taskToToggle = await fetchTask(id);
-    const upTask = { ...taskToToggle, reminder: !taskToToggle.reminder}
-    const res = await fetch(`http://localhost:5000/tasks/${id}`,{
-      method: 'PUT',
-      headers: {
-        'Content-type' : 'application/json'
-      },
-      body: JSON.stringify(upTask)
-    })
-    const data = await res.json();  
+
+  // Task completed
+  const taskCompleted = async (id) => { 
     setTasks(
       tasks.map((task)=>
-        task.id === id ? {...task, reminder: data.reminder} : task)
+        task.id === id ? {...task, completed: !task.completed} : task)
     )
+    console.log(tasks);
   }
 
   return (
     <Router>
       <div className="container">
-        <Header onToggle={ toggleAddTask } color={ color } buttonText = { text }/>
+        <p style={{ textAlign: 'center', fontSize: '2vw', fontWeight: 'bold' }}>{ 'THINGS TO DO:' }</p>
+        <hr/>
         <Route path = '/' exact render={(props)=>(
           <>
-            {showAddTask && <AddTask onAdd={ addTask } />}
-            {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} /> : 'You don\'t have any tasks pending!'}
+            {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={taskCompleted} /> : 'You don\'t have any tasks pending!'}
+            <hr />
+            <p style={{ textAlign: 'center', marginTop: '3vh', cursor:'pointer', fontWeight: 'bold' }}>DONE : {tasks.filter((task)=>(task.completed === true)).length}</p>
+            <AddTask onAdd={ addTask } />
           </>
         )} />
         <Route path='/about' component= { About } />
-        <Footer />
       </div>
     </Router>
   );

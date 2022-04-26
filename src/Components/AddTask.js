@@ -2,39 +2,30 @@ import { useState } from 'react';
 
 function AddTask({ onAdd }) {
 
-    const [text,setText] = useState('');
-    const [day,setDay] = useState('');
-    const [reminder,setReminder] = useState(false);
+    const [title,setTitle] = useState('');
+    const [completed, setCompleted] = useState(false);
 
     const onSubmit = (e) => {
         e.preventDefault(); // This prevents it from submitting it to a page.
-        if(!text) {
+        if(!title) {
             alert('Task field can\'t be empty!');
             return;
         } 
-        onAdd({ text, day, reminder });
+        onAdd({ title, completed, });
 
-        setText('');
-        setDay('');
-        setReminder(false);
+        setTitle('');
+        setCompleted(false);
     }
 
     return (
         <form className='add-form' onSubmit={ onSubmit }>
-            <div className='form-control'>
-                <label>Task</label>
-                <input type='text' placeholder='Add Task' value={text} onChange={(e)=>setText(e.target.value)}></input>
+            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+                <div className='form-control'>
+                    <input type='text' placeholder='Enter new Task' value={title} onChange={(e)=>setTitle(e.target.value)}></input>
+                </div>
+                
+                <input type='submit' value='Add Task' className='btn'/>
             </div>
-            <div className='form-control'>
-                <label>Day & Time</label>
-                <input type='text' placeholder='Add Day & Time' value={day} onChange={(e)=>setDay(e.target.value)}></input>
-            </div>
-            <div className='form-control form-control-check'>
-                <label>Set Reminder</label>
-                <input type='checkbox' value={reminder} checked={ reminder } onChange={(e)=>setReminder(e.currentTarget.checked)}></input>
-            </div>
-
-            <input type='submit' value='Save Task' className='btn btn-block'/>
         </form>
     )
 }
