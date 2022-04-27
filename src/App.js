@@ -50,21 +50,14 @@ function App() {
   }
 
   return (
-    <Router>
-      <Switch>
-        <Route path = '/'>
-          <div className='container'>
-            <p style={{ textAlign: 'center', fontSize: '2vw', fontWeight: 'bold' }}>{ 'THINGS TO DO:' }</p>
-            <hr/>
-            {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={taskCompleted} /> : 'You don\'t have any tasks pending!'}
-            <hr />
-            <p style={{ textAlign: 'center', marginTop: '3vh', cursor:'pointer', fontWeight: 'bold' }}>DONE : {tasks.filter((task)=>(task.completed === true)).length}</p>
-            <AddTask onAdd={ addTask } />
-          </div>
-        </Route>
-        <Route path='/about' component= { About } />
-      </Switch>
-    </Router>
+      <div className='container'>
+        <p style={{ textAlign: 'center', fontSize: '2vw', fontWeight: 'bold' }}>{ 'THINGS TO DO:' }</p>
+        <hr/>
+        {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={taskCompleted} /> : 'You don\'t have any tasks pending!'}
+        <hr />
+        <p style={{ textAlign: 'center', marginTop: '3vh', cursor:'pointer', fontWeight: 'bold' }}>DONE : {tasks.filter((task)=>(task.completed === true)).length}</p>
+        <AddTask onAdd={ addTask } />
+      </div>
   );
 }
 
